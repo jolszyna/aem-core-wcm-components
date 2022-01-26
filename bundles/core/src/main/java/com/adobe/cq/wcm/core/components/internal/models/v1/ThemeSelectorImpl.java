@@ -20,8 +20,8 @@ import com.adobe.cq.wcm.core.components.models.ThemeSelector;
 import com.adobe.cq.wcm.core.components.util.AbstractComponentImpl;
 import com.day.cq.wcm.api.Page;
 
+import edu.umd.cs.findbugs.jaif.JAIFSyntaxException;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
@@ -33,6 +33,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.util.*;
 
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
@@ -80,13 +81,19 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
                     if (modelResource != null) {
                         this.variables = new ArrayList();
                         for (Resource res : modelResource.getChildren()) {
-                            Node n = res.adaptTo(Node.class);
+                            Node model = res.adaptTo(Node.class);
+                            Node master = cssResource.getChild("master").adaptTo(Node.class);
 
-                            this.variables.add(n.getProperty("fieldLabel").getString() + ": " + n.getProperty("value").getString());
+                            String name = model.getProperty("name").getString();
+                            String label = model.getProperty("fieldLabel").getString();
+                            String value = master.getProperty(name) != null ? master.getProperty(name).getString() : model.getProperty("value").getString();
+
+
+                            this.variables.add(label + ": " + value);
                         }
                     }
                 }
-            } catch(Exception ex) {
+            } catch(RepositoryException ex) {
             }
         }
     }
