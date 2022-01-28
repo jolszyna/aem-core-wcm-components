@@ -45,4 +45,11 @@
     <sly data-sly-list="${page.htmlPageItems}"><script data-sly-test="${item.location.name == 'header'}"
             data-sly-element="${item.element.name @ context='unsafe'}" data-sly-attribute="${item.attributes}"></script>
     </sly>
+    <sly data-sly-use.theme="com.adobe.cq.wcm.core.components.models.ThemeSelector">
+        <pre data-sly-test="${theme.variables}">
+            <style>
+                ${theme.variables @ context='styleString'}
+             </style>
+        </pre>
+    </sly>
 </template>

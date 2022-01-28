@@ -62,6 +62,21 @@
                                                 path="${empty param.item ? requestPathInfo.suffix : param.item}"/>
                                         </items>
                                     </branding>
+                                    <theme
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="Theme"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <themePath
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                fieldDescription="Path under which the Content Fragments are located."
+                                                fieldLabel="Parent Path"
+                                                name="./parentPath"
+                                                nodeTypes="nt:folder, sling:Folder, sling:OrderedFolder"
+                                                rootPath="/content/dam"/>
+                                        </items>
+                                    </theme>
                                     <htmlid
                                         jcr:primaryType="nt:unstructured"
                                         jcr:title="HTML ID"
