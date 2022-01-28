@@ -6,7 +6,7 @@
     <jcr:content
         cq:lastModified="{Date}2022-01-25T14:33:20.863+01:00"
         cq:lastModifiedBy="admin"
-        cq:scaffolding="/conf/wknd-styler/settings/dam/cfm/models/page-theme/jcr:content/model"
+        cq:scaffolding="/conf/core-components-examples/settings/dam/cfm/models/page-theme/jcr:content/model"
         cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
         jcr:primaryType="cq:PageContent"
         jcr:title="Page Theme"
@@ -37,18 +37,18 @@
                             allowNew="{Boolean}true"
                             fieldLabel="CSS variable Content Fragment"
                             filter="hierarchy"
-                            fragmentmodelreference="/conf/wknd-styler/settings/dam/cfm/models/css-theme"
+                            fragmentmodelreference="/conf/core-components-examples/settings/dam/cfm/models/css-theme"
                             listOrder="22"
                             metaType="fragment-reference"
-                            name="cssVariableContentFragment"
+                            name="cssCFPath"
                             nameSuffix="contentReference"
                             renderReadOnly="false"
-                            rootPath="/content/dam/wknd-styler/themes"
+                            rootPath="/content/dam/core-components-examples/themes"
                             showEmptyInReadOnly="true"
                             valueType="string/content-fragment">
                             <field
                                 jcr:primaryType="nt:unstructured"
-                                rootPath="/content/dam/wknd-styler/themes"/>
+                                rootPath="/content/dam/core-components-examples/themes"/>
                             <granite:data jcr:primaryType="nt:unstructured"/>
                         </_x0031_643117535741>
                     </items>

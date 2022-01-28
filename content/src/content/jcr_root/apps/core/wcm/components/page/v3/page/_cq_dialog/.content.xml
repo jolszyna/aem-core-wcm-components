@@ -71,8 +71,8 @@
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
                                                 fieldDescription="Path under which the Content Fragments are located."
-                                                fieldLabel="Parent Path"
-                                                name="./parentPath"
+                                                fieldLabel="Theme CF Path"
+                                                name="./themeCFPath"
                                                 nodeTypes="nt:folder, sling:Folder, sling:OrderedFolder"
                                                 rootPath="/content/dam"/>
                                         </items>

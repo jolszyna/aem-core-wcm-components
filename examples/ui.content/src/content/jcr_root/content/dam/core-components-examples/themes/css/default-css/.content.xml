@@ -6,7 +6,7 @@
     jcr:uuid="22cf2eed-e5d4-452b-a33f-5e40f14ce1c5">
     <jcr:content
         cq:name="dark"
-        cq:parentPath="/content/dam/wknd-styler/themes/css"
+        cq:parentPath="/content/dam/core-components-examples/themes/css"
         jcr:lastModified="{Date}2022-01-26T17:14:12.879+01:00"
         jcr:lastModifiedBy="admin"
         jcr:primaryType="dam:AssetContent"
@@ -14,7 +14,7 @@
         contentFragment="{Boolean}true"
         lastFragmentSave="{Date}2022-01-26T17:14:12.879+01:00">
         <data
-            cq:model="/conf/wknd-styler/settings/dam/cfm/models/css-theme"
+            cq:model="/conf/core-components-examples/settings/dam/cfm/models/css-theme"
             jcr:primaryType="nt:unstructured">
             <master
                 jcr:mixinTypes="[cq:Taggable,dam:cfVariationNode]"

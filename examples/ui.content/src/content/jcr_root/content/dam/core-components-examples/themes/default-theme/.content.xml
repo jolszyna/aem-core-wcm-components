@@ -6,7 +6,7 @@
     jcr:uuid="da5cf46d-e9f0-492f-9b34-8704dacf1c24">
     <jcr:content
         cq:name="default-theme"
-        cq:parentPath="/content/dam/wknd-styler/themes"
+        cq:parentPath="/content/dam/core-components-examples/themes"
         jcr:lastModified="{Date}2022-01-26T17:21:04.446+01:00"
         jcr:lastModifiedBy="admin"
         jcr:primaryType="dam:AssetContent"
@@ -14,13 +14,12 @@
         contentFragment="{Boolean}true"
         lastFragmentSave="{Date}2022-01-26T17:21:04.446+01:00">
         <data
-            cq:model="/conf/wknd-styler/settings/dam/cfm/models/page-theme"
+            cq:model="/conf/core-components-examples/settings/dam/cfm/models/page-theme"
             jcr:primaryType="nt:unstructured">
             <master
                 jcr:mixinTypes="[cq:Taggable,dam:cfVariationNode]"
                 jcr:primaryType="nt:unstructured"
-                cssVariableContentFragment="/content/dam/wknd-styler/themes/css/light"
-                cssVariableContentFragment_x0040_LastModified="{Date}2022-01-26T17:21:04.435+01:00"/>
+                cssCFPath="/content/dam/core-components-examples/themes/css/default-css"/>
         </data>
         <metadata
             jcr:mixinTypes="[cq:Taggable]"

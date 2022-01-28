@@ -6,7 +6,7 @@
     <jcr:content
         cq:lastModified="{Date}2022-01-25T09:49:06.216+01:00"
         cq:lastModifiedBy="admin"
-        cq:scaffolding="/conf/wknd-styler/settings/dam/cfm/models/css-theme/jcr:content/model"
+        cq:scaffolding="/conf/core-components-examples/settings/dam/cfm/models/css-theme/jcr:content/model"
         cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
         jcr:primaryType="cq:PageContent"
         jcr:title="CSS Theme"
