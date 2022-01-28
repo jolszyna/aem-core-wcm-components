@@ -20,7 +20,6 @@ import com.adobe.cq.wcm.core.components.models.ThemeSelector;
 import com.adobe.cq.wcm.core.components.util.AbstractComponentImpl;
 import com.day.cq.wcm.api.Page;
 
-import edu.umd.cs.findbugs.jaif.JAIFSyntaxException;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -61,14 +60,14 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
 
     @PostConstruct
     private void initModel() {
-        String parentPath = currentPage.getProperties().get(PN_PATH, "");
+        String themePath = currentPage.getProperties().get(THEME_CF_PATH, "");
         String  a = "";
-        Resource themeResource = resourceResolver.getResource(parentPath + "/jcr:content/data/master");
+        Resource themeResource = resourceResolver.getResource(themePath + "/jcr:content/data/master");
 
         if(themeResource != null) {
             try {
                 Node themeNode = themeResource.adaptTo(Node.class);
-                String cssPath = themeNode.getProperty("cssVariableContentFragment").getString();
+                String cssPath = themeNode.getProperty(CSS_CF_PATH).getString();
 
                 Resource cssResource = resourceResolver.getResource(cssPath + "/jcr:content/data");
 

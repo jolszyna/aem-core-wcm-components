@@ -20,7 +20,8 @@ import org.osgi.annotation.versioning.ConsumerType;
 
 @ConsumerType
 public interface ThemeSelector extends Component {
-    String PN_PATH = "parentPath";
+    String THEME_CF_PATH = "parentPath";
+    String CSS_CF_PATH = "cssVariableContentFragment";
 
     @Nullable
     default String getVariables() {
