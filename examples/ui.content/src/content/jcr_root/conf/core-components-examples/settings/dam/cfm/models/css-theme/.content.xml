@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Template"
+    allowedPaths="[/content/entities(/.*)?]"
+    ranking="{Long}100">
+    <jcr:content
+        cq:lastModified="{Date}2022-01-25T09:49:06.216+01:00"
+        cq:lastModifiedBy="admin"
+        cq:scaffolding="/conf/wknd-styler/settings/dam/cfm/models/css-theme/jcr:content/model"
+        cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="CSS Theme"
+        sling:resourceSuperType="dam/cfm/models/console/components/data/entity"
+        sling:resourceType="dam/cfm/models/console/components/data/entity/default"
+        status="enabled">
+        <metadata jcr:primaryType="nt:unstructured"/>
+        <model
+            cq:targetPath="/content/entities"
+            jcr:primaryType="cq:PageContent"
+            sling:resourceType="wcm/scaffolding/components/scaffolding"
+            dataTypesConfig="/mnt/overlay/settings/dam/cfm/models/formbuilderconfig/datatypes"
+            maxGeneratedOrder="20">
+            <cq:dialog
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/authoring/dialog">
+                <content
+                    jcr:lastModified="{Date}2022-01-25T09:49:06.216+01:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                    <items
+                        jcr:primaryType="nt:unstructured"
+                        maxGeneratedOrder="20">
+                        <_x0031_641985848333
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--primaryColor"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="primaryColor"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#ffea00"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_641985848333>
+                        <_x0031_643062682735
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--bodyBackground"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="bodyBackground"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#ffffff"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062682735>
+                        <_x0031_643062716658
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--teaserBackground"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="teaserBackground"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#ffffff"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062716658>
+                        <_x0031_643062754336
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--primaryTextColor"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="primaryTextColor"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#202020"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062754336>
+                        <_x0031_643062765798
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--secondaryTextColor"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="secondaryTextColor"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#696969"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062765798>
+                        <_x0031_643062832343
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--primaryFont"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="primaryFont"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="Asar,Georgia,Times New Roman,Times,serif"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062832343>
+                        <_x0031_643062828117
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--secondaryFont"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="secondaryFont"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062828117>
+                        <_x0031_643062027444
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--buttonColor"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="buttonColor"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#ff0000"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062027444>
+                        <_x0031_643062898186
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--buttonTextColor"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="buttonTextColor"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="#202020"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062898186>
+                        <_x0031_643062919520
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="--buttonRadius"
+                            listOrder="1"
+                            maxlength="255"
+                            metaType="text-single"
+                            name="buttonRadius"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            value="10px"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_643062919520>
+                    </items>
+                </content>
+            </cq:dialog>
+        </model>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:isCheckedOut="{Boolean}true"
+    jcr:mixinTypes="[mix:referenceable,mix:versionable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="da5cf46d-e9f0-492f-9b34-8704dacf1c24">
+    <jcr:content
+        cq:name="default-theme"
+        cq:parentPath="/content/dam/wknd-styler/themes"
+        jcr:lastModified="{Date}2022-01-26T17:21:04.446+01:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="Default Theme"
+        contentFragment="{Boolean}true"
+        lastFragmentSave="{Date}2022-01-26T17:21:04.446+01:00">
+        <data
+            cq:model="/conf/wknd-styler/settings/dam/cfm/models/page-theme"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:mixinTypes="[cq:Taggable,dam:cfVariationNode]"
+                jcr:primaryType="nt:unstructured"
+                cssVariableContentFragment="/content/dam/wknd-styler/themes/css/light"
+                cssVariableContentFragment_x0040_LastModified="{Date}2022-01-26T17:21:04.435+01:00"/>
+        </data>
+        <metadata
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"/>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:isCheckedOut="{Boolean}true"
+    jcr:mixinTypes="[mix:referenceable,mix:versionable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="16fd18b4-e398-404f-ae29-2572ef0e6c2b">
+    <jcr:content
+        cq:name="light"
+        cq:parentPath="/content/dam/wknd-styler/themes/css"
+        jcr:lastModified="{Date}2022-01-26T17:13:19.800+01:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="Light"
+        contentFragment="{Boolean}true"
+        lastFragmentSave="{Date}2022-01-26T17:13:19.800+01:00">
+        <data
+            cq:model="/conf/wknd-styler/settings/dam/cfm/models/css-theme"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:mixinTypes="[cq:Taggable,dam:cfVariationNode]"
+                jcr:primaryType="nt:unstructured"
+                bodyBackground="#ffffff"
+                bodyBackground_x0040_LastModified="{Date}2022-01-26T17:13:19.783+01:00"
+                buttonColor="#ffea00"
+                buttonColor_x0040_LastModified="{Date}2022-01-26T17:13:19.786+01:00"
+                buttonRadius="10px"
+                buttonRadius_x0040_LastModified="{Date}2022-01-26T17:13:19.787+01:00"
+                buttonTextColor="#202020"
+                buttonTextColor_x0040_LastModified="{Date}2022-01-26T17:13:19.786+01:00"
+                primaryColor="#ffff00"
+                primaryColor_x0040_LastModified="{Date}2022-01-26T17:13:19.783+01:00"
+                primaryFont="Asar,Georgia,Times New Roman,Times,serif"
+                primaryFont_x0040_LastModified="{Date}2022-01-26T17:13:19.785+01:00"
+                primaryTextColor="#202020"
+                primaryTextColor_x0040_LastModified="{Date}2022-01-26T17:13:19.784+01:00"
+                secondaryFont="Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif"
+                secondaryFont_x0040_LastModified="{Date}2022-01-26T17:13:19.785+01:00"
+                secondaryTextColor="#696969"
+                secondaryTextColor_x0040_LastModified="{Date}2022-01-26T17:13:19.784+01:00"
+                teaserBackground="#ffffff"
+                teaserBackground_x0040_LastModified="{Date}2022-01-26T17:13:19.784+01:00"/>
+        </data>
+        <metadata
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"/>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>
