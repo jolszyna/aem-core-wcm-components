@@ -74,7 +74,11 @@
                                                 fieldLabel="Theme CF Path"
                                                 name="./themeCFPath"
                                                 nodeTypes="nt:folder, sling:Folder, sling:OrderedFolder"
-                                                rootPath="/content/dam"/>
+                                                rootPath="/content/dam">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    cq-msm-lockable="./themeCFPath"/>
+                                            </themePath>
                                         </items>
                                     </theme>
                                     <htmlid
