@@ -20,9 +20,11 @@ import com.adobe.cq.wcm.core.components.models.ThemeSelector;
 import com.adobe.cq.wcm.core.components.util.AbstractComponentImpl;
 import com.day.cq.wcm.api.Page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
@@ -60,8 +62,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
 
     @PostConstruct
     private void initModel() {
-        String themePath = currentPage.getProperties().get(THEME_CF_PATH, "");
-        String  a = "";
+        String themePath = resolveThemePath();
         Resource themeResource = resourceResolver.getResource(themePath + "/jcr:content/data/master");
 
         if(themeResource != null) {
@@ -95,6 +96,28 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
             } catch(RepositoryException ex) {
             }
         }
+    }
+
+    private String resolveThemePath() {
+        String themePath = currentPage.getProperties().get(THEME_CF_PATH, StringUtils.EMPTY);
+
+        if(StringUtils.isNotEmpty(themePath))
+            return themePath;
+
+        com.day.cq.wcm.api.Page tmp = currentPage;
+
+        while( tmp != null && tmp.hasContent() && tmp.getDepth() > 1 ) {
+            ValueMap props = tmp.getProperties();
+            if( props != null ) {
+                String tmpPath = props.get(THEME_CF_PATH, StringUtils.EMPTY);
+                if(StringUtils.isNotEmpty(tmpPath)) {
+                    return tmpPath;
+                }
+                tmp = tmp.getParent();
+            }
+        }
+
+        return StringUtils.EMPTY;
     }
 
     public String getVariables() {
