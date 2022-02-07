@@ -20,9 +20,19 @@ import org.osgi.annotation.versioning.ConsumerType;
 
 @ConsumerType
 public interface ThemeSelector extends Component {
+    /**
+     * Path to the theme Content Fragment
+     */
     String THEME_CF_PATH = "themeCFPath";
+
+    /**
+     * Path to the css Content Fragment (to be extarcted from the theme Content Fragment)
+     */
     String CSS_CF_PATH = "cssCFPath";
 
+    /**
+     * Returns string with css variables to be exposed (all properties from the css Content Fragment)
+     */
     @Nullable
     default String getVariables() {
         return null;

@@ -30,6 +30,8 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -40,10 +42,11 @@ import java.util.*;
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = { ThemeSelector.class, ComponentExporter.class }, resourceType = {
-        ThemeSelectorImpl.RESOURCE_TYPE_V1})
+        ThemeSelectorImpl.RESOURCE_TYPE_V3})
 public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSelector {
+    private static final Logger LOG = LoggerFactory.getLogger(ThemeSelectorImpl.class);
 
-    protected static final String RESOURCE_TYPE_V1 = "core/wcm/components/themeselector/v1/themeselector";
+    protected static final String RESOURCE_TYPE_V3 = "core/wcm/components/themeselector/v3/themeselector";
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
     @Default(values="No resourceType")
@@ -63,20 +66,20 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     @PostConstruct
     private void initModel() {
         String themePath = resolveThemePath();
-        Resource themeResource = resourceResolver.getResource(themePath + "/jcr:content/data/master");
+        Resource themeResource = resourceResolver.getResource(String.format("%s/jcr:content/data/master", themePath));
 
         if(themeResource != null) {
             try {
                 Node themeNode = themeResource.adaptTo(Node.class);
                 String cssPath = themeNode.getProperty(CSS_CF_PATH).getString();
 
-                Resource cssResource = resourceResolver.getResource(cssPath + "/jcr:content/data");
+                Resource cssResource = resourceResolver.getResource(String.format("%s/jcr:content/data", cssPath));
 
                 if (cssResource != null) {
                     Node cssNode = cssResource.adaptTo(Node.class);
                     String modelPath = cssNode.getProperty("cq:model").getString();
 
-                    Resource modelResource = resourceResolver.getResource(modelPath + "/jcr:content/model/cq:dialog/content/items/");
+                    Resource modelResource = resourceResolver.getResource(String.format("%s/jcr:content/model/cq:dialog/content/items/", modelPath));
 
                     if (modelResource != null) {
                         this.variables = new ArrayList();
@@ -89,11 +92,12 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
                             String value = master.getProperty(name) != null ? master.getProperty(name).getString() : model.getProperty("value").getString();
 
 
-                            this.variables.add(label + ": " + value);
+                            this.variables.add(String.format("%s: %s", label, value));
                         }
                     }
                 }
             } catch(RepositoryException ex) {
+                LOG.error("Couldn't read theme CF path for current page", ex);
             }
         }
     }
@@ -121,6 +125,6 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     }
 
     public String getVariables() {
-        return ":root {" + String.join(";", this.variables) + ";}";
+        return String.format(":root {%s;}", String.join(";", this.variables));
     }
 }
