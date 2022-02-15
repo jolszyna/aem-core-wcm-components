@@ -89,10 +89,10 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
 
                             String name = model.getProperty("name").getString();
                             String label = model.getProperty("fieldLabel").getString();
-                            String value = master.getProperty(name) != null ? master.getProperty(name).getString() : model.getProperty("value").getString();
+                            String value = master.hasProperty(name) ? master.getProperty(name).getString() : (model.hasProperty("value") ? model.getProperty("value").getString() : null);
 
-
-                            this.variables.add(String.format("%s: %s", label, value));
+                            if (value != null)
+                                this.variables.add(String.format("%s: %s", label, value));
                         }
                     }
                 }
