@@ -35,8 +35,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import java.util.*;
 
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
@@ -61,7 +59,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     @Inject
     private Page currentPage;
 
-    private List variables;
+    private List<String> variables;
 
     @PostConstruct
     private void initModel() {
@@ -70,33 +68,33 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
 
         if(themeResource != null) {
             try {
-                Node themeNode = themeResource.adaptTo(Node.class);
-                String cssPath = themeNode.getProperty(CSS_CF_PATH).getString();
+                ValueMap themeMap = themeResource.getValueMap();
+                String cssPath = themeMap.get(CSS_CF_PATH, String.class);
 
                 Resource cssResource = resourceResolver.getResource(String.format("%s/jcr:content/data", cssPath));
 
                 if (cssResource != null) {
-                    Node cssNode = cssResource.adaptTo(Node.class);
-                    String modelPath = cssNode.getProperty("cq:model").getString();
+                    ValueMap stylesMap = cssResource.getValueMap();
+                    String modelPath = stylesMap.get("cq:model", String.class);
 
                     Resource modelResource = resourceResolver.getResource(String.format("%s/jcr:content/model/cq:dialog/content/items/", modelPath));
 
                     if (modelResource != null) {
                         this.variables = new ArrayList();
                         for (Resource res : modelResource.getChildren()) {
-                            Node model = res.adaptTo(Node.class);
-                            Node master = cssResource.getChild("master").adaptTo(Node.class);
+                            ValueMap modelMap = res.getValueMap();
+                            ValueMap masterMap = cssResource.getChild("master").getValueMap();
 
-                            String name = model.getProperty("name").getString();
-                            String label = model.getProperty("fieldLabel").getString();
-                            String value = master.hasProperty(name) ? master.getProperty(name).getString() : (model.hasProperty("value") ? model.getProperty("value").getString() : null);
+                            String name = modelMap.get("name", String.class);
+                            String label = modelMap.get("fieldLabel", String.class);
+                            String value = masterMap.containsKey(name) ? masterMap.get(name, String.class) : modelMap.get("value", String.class);
 
                             if (value != null)
                                 this.variables.add(String.format("%s: %s", label, value));
                         }
                     }
                 }
-            } catch(RepositoryException ex) {
+            } catch(Exception ex) {
                 LOG.error("Couldn't read theme CF path for current page", ex);
             }
         }
