@@ -46,10 +46,8 @@
             data-sly-element="${item.element.name @ context='unsafe'}" data-sly-attribute="${item.attributes}"></script>
     </sly>
     <sly data-sly-use.theme="com.adobe.cq.wcm.core.components.models.ThemeSelector">
-        <pre data-sly-test="${theme.variables}">
-            <style>
-                ${theme.variables @ context='styleString'}
-             </style>
-        </pre>
+        <style data-sly-test="${theme.variables}">
+            ${theme.variables @ context='styleString'}
+        </style>
     </sly>
 </template>
