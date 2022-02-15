@@ -33,12 +33,12 @@
                         maxGeneratedOrder="22">
                         <_x0031_643117535741
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference/multifield"
                             allowNew="{Boolean}true"
                             fieldLabel="CSS variable Content Fragment"
                             filter="hierarchy"
                             fragmentmodelreference="/conf/core-components-examples/settings/dam/cfm/models/css-theme"
-                            listOrder="22"
+                            listOrder="9"
                             metaType="fragment-reference"
                             name="cssCFPath"
                             nameSuffix="contentReference"
@@ -48,7 +48,13 @@
                             valueType="string/content-fragment[]">
                             <field
                                 jcr:primaryType="nt:unstructured"
-                                rootPath="/content/dam/core-components-examples/themes"/>
+                                sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                                fragmentmodelreference="/conf/core-components-examples/settings/dam/cfm/models/css-theme"
+                                name="cssCFPath"
+                                renderReadOnly="false"
+                                rootPath="/content/dam/core-components-examples/themes">
+                                <granite:data jcr:primaryType="nt:unstructured"/>
+                            </field>
                             <granite:data jcr:primaryType="nt:unstructured"/>
                         </_x0031_643117535741>
                     </items>

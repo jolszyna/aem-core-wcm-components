@@ -19,7 +19,7 @@
             <master
                 jcr:mixinTypes="[cq:Taggable,dam:cfVariationNode]"
                 jcr:primaryType="nt:unstructured"
-                cssCFPath="/content/dam/core-components-examples/themes/css/default-css"/>
+                cssCFPath="[/content/dam/core-components-examples/themes/css/default-css]"/>
         </data>
         <metadata
             jcr:mixinTypes="[cq:Taggable]"
