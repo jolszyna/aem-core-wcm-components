@@ -69,33 +69,37 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
         if(themeResource != null) {
             try {
                 ValueMap themeMap = themeResource.getValueMap();
-                String cssPath = themeMap.get(CSS_CF_PATH, String.class);
-
-                Resource cssResource = resourceResolver.getResource(String.format("%s/jcr:content/data", cssPath));
-
-                if (cssResource != null) {
-                    ValueMap stylesMap = cssResource.getValueMap();
-                    String modelPath = stylesMap.get("cq:model", String.class);
-
-                    Resource modelResource = resourceResolver.getResource(String.format("%s/jcr:content/model/cq:dialog/content/items/", modelPath));
-
-                    if (modelResource != null) {
-                        this.variables = new ArrayList();
-                        for (Resource res : modelResource.getChildren()) {
-                            ValueMap modelMap = res.getValueMap();
-                            ValueMap masterMap = cssResource.getChild("master").getValueMap();
-
-                            String name = modelMap.get("name", String.class);
-                            String label = modelMap.get("fieldLabel", String.class);
-                            String value = masterMap.containsKey(name) ? masterMap.get(name, String.class) : modelMap.get("value", String.class);
-
-                            if (value != null)
-                                this.variables.add(String.format("%s: %s", label, value));
-                        }
-                    }
-                }
+                resolveVariables(themeMap.get(CSS_CF_PATH, new String[0]));
             } catch(Exception ex) {
                 LOG.error("Couldn't read theme CF path for current page", ex);
+            }
+        }
+    }
+
+    private void resolveVariables(String[] paths) {
+        this.variables = new ArrayList<>();
+        for(String cssPath : paths) {
+            Resource cssResource = resourceResolver.getResource(String.format("%s/jcr:content/data", cssPath));
+
+            if (cssResource != null) {
+                Resource master = cssResource.getChild("master");
+                ValueMap stylesMap = cssResource.getValueMap();
+                String modelPath = stylesMap.get("cq:model", String.class);
+                Resource modelResource = resourceResolver.getResource(String.format("%s/jcr:content/model/cq:dialog/content/items/", modelPath));
+
+                if (modelResource != null && master != null) {
+                    ValueMap masterMap = master.getValueMap();
+
+                    for (Resource res : modelResource.getChildren()) {
+                        ValueMap modelMap = res.getValueMap();
+                        String name = modelMap.get("name", String.class);
+                        String label = modelMap.get("fieldLabel", String.class);
+                        String value = masterMap.containsKey(name) ? masterMap.get(name, String.class) : modelMap.get("value", String.class);
+
+                        if (value != null)
+                            this.variables.add(String.format("%s: %s", label, value));
+                    }
+                }
             }
         }
     }

@@ -45,7 +45,7 @@
                             renderReadOnly="false"
                             rootPath="/content/dam/core-components-examples/themes"
                             showEmptyInReadOnly="true"
-                            valueType="string/content-fragment">
+                            valueType="string/content-fragment[]">
                             <field
                                 jcr:primaryType="nt:unstructured"
                                 rootPath="/content/dam/core-components-examples/themes"/>
