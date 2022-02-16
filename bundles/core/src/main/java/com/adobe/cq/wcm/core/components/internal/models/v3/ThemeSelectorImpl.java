@@ -15,6 +15,10 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 package com.adobe.cq.wcm.core.components.internal.models.v3;
 
+import com.adobe.cq.dam.cfm.ContentElement;
+import com.adobe.cq.dam.cfm.ContentFragment;
+import com.adobe.cq.dam.cfm.ElementTemplate;
+import com.adobe.cq.dam.cfm.FragmentTemplate;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.wcm.core.components.models.ThemeSelector;
 import com.adobe.cq.wcm.core.components.util.AbstractComponentImpl;
@@ -64,12 +68,18 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     @PostConstruct
     private void initModel() {
         String themePath = resolveThemePath();
-        Resource themeResource = resourceResolver.getResource(String.format("%s/jcr:content/data/master", themePath));
+        Resource themeResource = resourceResolver.getResource(themePath);
 
         if(themeResource != null) {
             try {
-                ValueMap themeMap = themeResource.getValueMap();
-                resolveVariables(themeMap.get(CSS_CF_PATH, new String[0]));
+                ContentFragment theme = themeResource.adaptTo(ContentFragment.class);
+
+                if(theme != null) {
+                    ContentElement element = theme.getElement(CSS_CF_PATH);
+
+                    if(element != null)
+                        resolveVariables(element.getValue().getValue(String[].class));
+                }
             } catch(Exception ex) {
                 LOG.error("Couldn't read theme CF path for current page", ex);
             }
@@ -79,25 +89,25 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     private void resolveVariables(String[] paths) {
         this.variables = new ArrayList<>();
         for(String cssPath : paths) {
-            Resource cssResource = resourceResolver.getResource(String.format("%s/jcr:content/data", cssPath));
+            if(StringUtils.isEmpty(cssPath))
+                continue;
 
-            if (cssResource != null) {
-                Resource master = cssResource.getChild("master");
-                ValueMap stylesMap = cssResource.getValueMap();
-                String modelPath = stylesMap.get("cq:model", String.class);
-                Resource modelResource = resourceResolver.getResource(String.format("%s/jcr:content/model/cq:dialog/content/items/", modelPath));
+            Resource cssResource = resourceResolver.getResource(cssPath);
 
-                if (modelResource != null && master != null) {
-                    ValueMap masterMap = master.getValueMap();
+            if(cssResource != null) {
+                ContentFragment master = cssResource.adaptTo(ContentFragment.class);
 
-                    for (Resource res : modelResource.getChildren()) {
-                        ValueMap modelMap = res.getValueMap();
-                        String name = modelMap.get("name", String.class);
-                        String label = modelMap.get("fieldLabel", String.class);
-                        String value = masterMap.containsKey(name) ? masterMap.get(name, String.class) : modelMap.get("value", String.class);
+                if(master != null) {
+                    FragmentTemplate template = master.getTemplate();
 
-                        if (value != null)
-                            this.variables.add(String.format("%s: %s", label, value));
+                    Iterator<ElementTemplate> it = template.getElements();
+                    while(it.hasNext()){
+                        ElementTemplate et = it.next();
+                        String name = et.getName();
+                        String value = master.hasElement(name) ? master.getElement(name).getValue().getValue(String.class) : et.getDefaultContent();
+
+                        if(StringUtils.isNotEmpty(value))
+                            this.variables.add(String.format("%s: %s", et.getTitle(), value));
                     }
                 }
             }
