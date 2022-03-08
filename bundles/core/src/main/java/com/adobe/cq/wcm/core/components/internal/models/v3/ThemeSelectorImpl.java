@@ -49,6 +49,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     private static final Logger LOG = LoggerFactory.getLogger(ThemeSelectorImpl.class);
 
     protected static final String RESOURCE_TYPE_V3 = "core/wcm/components/themeselector/v3/themeselector";
+    protected static final String DEFAULT_CSS_CN = ":root";
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
     @Default(values="No resourceType")
@@ -63,7 +64,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     @Inject
     private Page currentPage;
 
-    private List<String> variables;
+    private Map<String, List<String>> variablesMap;
 
     @PostConstruct
     private void initModel() {
@@ -87,7 +88,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     }
 
     private void resolveVariables(String[] paths) {
-        this.variables = new ArrayList<>();
+        this.variablesMap = new HashMap<>();
         for(String cssPath : paths) {
             if(StringUtils.isEmpty(cssPath))
                 continue;
@@ -98,6 +99,7 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
                 ContentFragment master = cssResource.adaptTo(ContentFragment.class);
 
                 if(master != null) {
+                    List<String> variables = new ArrayList<>();
                     FragmentTemplate template = master.getTemplate();
 
                     Iterator<ElementTemplate> it = template.getElements();
@@ -107,8 +109,11 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
                         String value = master.hasElement(name) ? master.getElement(name).getValue().getValue(String.class) : et.getDefaultContent();
 
                         if(StringUtils.isNotEmpty(value))
-                            this.variables.add(String.format("%s: %s", et.getTitle(), value));
+                            variables.add(String.format("%s: %s", et.getTitle(), value));
                     }
+
+                    String className = master.hasElement(CSS_CN) ? master.getElement(CSS_CN).getValue().getValue(String.class) : DEFAULT_CSS_CN;
+                    this.variablesMap.put(className, variables);
                 }
             }
         }
@@ -137,6 +142,11 @@ public class ThemeSelectorImpl extends AbstractComponentImpl implements ThemeSel
     }
 
     public String getVariables() {
-        return String.format(":root {%s;}", String.join(";", this.variables));
+        StringBuilder sb = new StringBuilder();
+
+        for(Map.Entry<String, List<String>> entry : this.variablesMap.entrySet())
+            sb.append(String.format("%s {%s;} ", entry.getKey(), String.join(";", entry.getValue())));
+
+        return sb.toString();
     }
 }

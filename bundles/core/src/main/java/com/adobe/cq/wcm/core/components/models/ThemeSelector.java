@@ -26,9 +26,14 @@ public interface ThemeSelector extends Component {
     String THEME_CF_PATH = "themeCFPath";
 
     /**
-     * Path to the css Content Fragment (to be extarcted from the theme Content Fragment)
+     * Path to the css Content Fragment (to be extracted from the theme Content Fragment)
      */
     String CSS_CF_PATH = "cssCFPath";
+
+    /**
+     * CSS class name (to be extracted from the theme Content Fragment)
+     */
+    String CSS_CN = "cssCN";
 
     /**
      * Returns string with css variables to be exposed (all properties from the css Content Fragment)
